@@ -3,8 +3,15 @@
 </p>
 
 # Ecommerce API
-
-1. Start up Database
+1. Clone the project
+2. ```npm install```
+3. Con the ```.env.template``` file and rename it to ```.env```
+4. Change environment variables
+5. Start up Database
 ```
   docker-compose up -d
+```
+6. Start up nest application 
+```
+  npm start:dev
 ```

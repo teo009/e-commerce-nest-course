@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -27,13 +27,13 @@ export class ProductsService {
   }
 
   async findAll() {
-    const allProducts = await this.productRepository.find();
-    return allProducts;
+    return await this.productRepository.find({});
   }
 
   async findOne(id: string) {
-    //console.log(await this.productRepository.findOneBy({ id: id }));
-    const product = await this.productRepository.findOneBy({ id: id });
+    const product = await this.productRepository.findOneBy({ id });
+    if(!product)
+      throw new NotFoundException('Product not found');
     return product;
   }
 
@@ -41,8 +41,10 @@ export class ProductsService {
     return `This action updates a #${id} product`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: string) {
+    const product = await this.findOne(id);
+    await this.productRepository.delete(id);
+    return `Product "${product.title}" deleted successfully`;
   }
 
   //Own methods

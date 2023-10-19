@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
+import { 
+  Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseUUIDPipe 
+} from '@nestjs/common';
+
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { UUID } from 'typeorm/driver/mongodb/bson.typings';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -14,8 +17,9 @@ export class ProductsController {
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query() paginatioDto: PaginationDto) {
+    //console.log(paginatioDto);
+    return this.productsService.findAll(paginatioDto);
   }
 
   @Get(':id')

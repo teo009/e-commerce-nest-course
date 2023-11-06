@@ -11,7 +11,11 @@
 ```
   docker-compose up -d
 ```
-6. Start up nest application 
+6. Execute SEED
 ```
-  npm start:dev
+  http://localhost:3000/api/seed
+```
+7. Start up nest application 
+```
+  npm run start:dev
 ```

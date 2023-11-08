@@ -5,7 +5,7 @@
 # Ecommerce API
 1. Clone the project
 2. ```npm install```
-3. Con the ```.env.template``` file and rename it to ```.env```
+3. Clone the ```.env.template``` file and rename it to ```.env```
 4. Change environment variables
 5. Start up Database
 ```

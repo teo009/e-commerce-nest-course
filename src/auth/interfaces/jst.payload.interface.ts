@@ -1,4 +1,4 @@
 export interface JwtPayload {
-  email: string;
+  id: string;
   //Añadir todo lo que se quiera grabar;
 }

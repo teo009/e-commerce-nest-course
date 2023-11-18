@@ -27,7 +27,7 @@ export class AuthService {
       delete user.password;
       return {
         ...savedResponse,
-        token: this.getJwtToken({ email: savedResponse.email }),
+        token: this.getJwtToken({ id: savedResponse.id }),
       };
     } catch (error) {
       this.handleDBErrors(error);
@@ -37,7 +37,7 @@ export class AuthService {
   async login(LoginUserDto: LoginUserDto) {
     const { password, email } = LoginUserDto;
     const user = await this.userRepository.findOne({
-      where: { email }, select: { email: true, password: true }
+      where: { email }, select: { email: true, password: true, id: true }
     });
 
     if(!user) 
@@ -47,7 +47,7 @@ export class AuthService {
 
     return {
       ...user, 
-      token: this.getJwtToken({ email: user.email }),
+      token: this.getJwtToken({ id: user.id }),
     };
   }
 
